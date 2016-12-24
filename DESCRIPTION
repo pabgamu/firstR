@@ -6,7 +6,7 @@ Author: Pablo Garcia <pabgamu@gmail.com>
 Maintainer: Pablo Garcia <pabgamu@gmail.com>
 Description: To be discussed.
 Depends: R (>= 3.2.0) 
-License: GPL-2
+License: GPL-3
 LazyData: true
 Imports:
     dplyr (>= 0.5.0), 
@@ -19,6 +19,6 @@ Suggests:
   testthat,
   devtools,
   roxygen2,
-    knitr,
-    rmarkdown
+  knitr,
+  rmarkdown
 VignetteBuilder: knitr
