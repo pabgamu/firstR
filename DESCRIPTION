@@ -6,8 +6,8 @@ Author: Pablo Garcia <pabgamu@gmail.com>
 Maintainer: Pablo Garcia <pabgamu@gmail.com>
 Description: To be discussed.
 Depends: R (>= 3.2.0) 
-License: License: GPL-2
-LazyData: LazyData: true
+License: GPL-2
+LazyData: true
 Imports:
     dplyr (>= 0.5.0), 
     readr (>= 1.0.0),
@@ -15,4 +15,7 @@ Imports:
     maps  (>= 3.1.1)
 Encoding: UTF-8
 RoxygenNote: 5.0.1
-Suggests: testthat
+Suggests:
+  testthat,
+  devtools,
+  roxygen2
