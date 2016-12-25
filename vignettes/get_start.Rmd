@@ -21,18 +21,6 @@ Data is stored in *.csc.bz2 files in the `r file.path('inst','extdata')` directo
 
 This files have a standard name, so you you can access data from the package functions using only the year number as input.
 
-# Reading full datasets
-
-To get the full data set use the function \code{\link{fars_data_years}}, this 
-function returns a list of tibble, one for each year of data.
-
-```{r}
-library(firstR)
-print(getwd())
-# fars_2014 <- fars_read_years(years = c(2014,2015))
-# 
-# head(fars_2014)
-```
 
 # Summarizing data
  
@@ -41,10 +29,11 @@ A summary of the data in terms of number of fatalities by month can be computed 
 The following code computes the summary for 2013 data.
 
 ```{r}
-print(getwd())
-# fars2013_14 <- fars_summarize_years(years = c(2013,2014))
-# # 
-# fars2013_14
+library(firstR)
+
+fars2013_14 <- fars_summarize_years(years = c(2013,2014))
+
+fars2013_14
 
 ```
 
@@ -53,6 +42,6 @@ print(getwd())
 Finally the accident location can be plotted for a single state input. State code must be used as input.
 
 ```{r}
-# fars_map_state(state.num = 1, year = 2013)
+fars_map_state(state.num = 1, year = 2013)
 
 ```
