@@ -70,15 +70,15 @@ make_filename <- function(year) {
 #' fars_2012_2014 <- fars_read_years(2012:2014)
 #'}
 #'
-#' @importFrom dplyr mutate select
+#' @importFrom dplyr mutate select %>%
 #'
 fars_read_years <- function(years) {
         lapply(years, function(year) {
                 file <- make_filename(year)
                 tryCatch({
                         dat <- fars_read(file)
-                        dplyr::mutate(dat, year = year) %>%
-                                dplyr::select(MONTH, year)
+                        dplyr::mutate_(dat, year = ~ year) %>%
+                                dplyr::select_(.dots = c('MONTH', 'year'))
                 }, error = function(e) {
                         warning("invalid year: ", year)
                         return(NULL)
@@ -103,7 +103,7 @@ fars_read_years <- function(years) {
 #'
 #' @examples
 #' \dontrun{
-#' # summarise one year od data
+#' # summarise one year of data
 #' monthly_summ_2013 <- fars_summarize_years(2013)
 #'
 #' # summarise three years of data
@@ -112,14 +112,14 @@ fars_read_years <- function(years) {
 #'
 #' @export
 #' @importFrom tidyr spread
-#' @importFrom dplyr bind_rows group_by summarize
+#' @importFrom dplyr bind_rows group_by summarize %>%
 #'
 fars_summarize_years <- function(years) {
         dat_list <- fars_read_years(years)
         dplyr::bind_rows(dat_list) %>%
-                dplyr::group_by(year, MONTH) %>%
-                dplyr::summarize(n = n()) %>%
-                tidyr::spread(year, n)
+                dplyr::group_by_(~ year, ~ MONTH) %>%
+                dplyr::summarize_(nCount = ~ n()) %>%
+                tidyr::spread_(key_col = 'year', value_col = 'nCount')
 }
 
 
@@ -164,7 +164,7 @@ fars_map_state <- function(state.num, year) {
 
         if(!(state.num %in% unique(data$STATE)))
                 stop("invalid STATE number: ", state.num)
-        data.sub <- dplyr::filter(data, STATE == state.num)
+        data.sub <- dplyr::filter_(data, ~ STATE == state.num)
         if(nrow(data.sub) == 0L) {
                 message("no accidents to plot")
                 return(invisible(NULL))
@@ -172,7 +172,8 @@ fars_map_state <- function(state.num, year) {
         is.na(data.sub$LONGITUD) <- data.sub$LONGITUD > 900
         is.na(data.sub$LATITUDE) <- data.sub$LATITUDE > 90
         with(data.sub, {
-                maps::map("state", ylim = range(LATITUDE, na.rm = TRUE),
+                maps::map(database = "state",
+                          ylim = range(LATITUDE, na.rm = TRUE),
                           xlim = range(LONGITUD, na.rm = TRUE))
                 graphics::points(LONGITUD, LATITUDE, pch = 46)
         })

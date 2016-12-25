@@ -21,7 +21,7 @@ fars data files must be working directory.
 }
 \examples{
 \dontrun{
-# summarise one year od data
+# summarise one year of data
 monthly_summ_2013 <- fars_summarize_years(2013)
 
 # summarise three years of data
