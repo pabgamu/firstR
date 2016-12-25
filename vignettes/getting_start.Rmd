@@ -1,0 +1,57 @@
+---
+title: "Getting start"
+author: "Pablo Garcia"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting start}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+In this vignette we provide a short of description on how \code{firstR} works.
+
+The package allows to summarize and visualize data from the [Fatality Analysis Reporting System](https://www.nhtsa.gov/research-data/fatality-analysis-reporting-system-fars).
+
+# Data loading
+
+Some sample data is included in the package for convenience. It includes fars data from years 2013 to 2015.
+
+Data is stored in *.csc.bz2 files in the `r file.path('inst','extdata')` directory, to get start copy any of the files to your working directory.
+
+This files have a standard name, so you you can access data from the package functions using only the year number as input.
+
+# Reading full datasets
+
+To get the full data set use the function \code{\link{fars_data_years}}, this 
+function returns a list of tibble, one for each year of data.
+
+```{r}
+library(firstR)
+fars_2014 <- fars_read_years(years = c(2014,2015))
+
+head(fars_2014)
+```
+
+# Summarizing data
+ 
+A summary of the data in terms of number of fatalities by month can be computed with \code{\link{fars_summarize_years}}
+
+The following code computes the summary for 2013 data.
+
+```{r}
+
+fars2013_14 <- fars_summarize_years(years = c(2013,2014))
+
+fars2013_14
+
+```
+
+# Data visualization
+
+Finally the accident location can be plotted for a single state input. State code must be used as input.
+
+```{r}
+fars_map_state(state.num = 1, year = 2013)
+
+```
