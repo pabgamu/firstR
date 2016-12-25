@@ -28,6 +28,7 @@ function returns a list of tibble, one for each year of data.
 
 ```{r}
 library(firstR)
+print(getwd())
 # fars_2014 <- fars_read_years(years = c(2014,2015))
 # 
 # head(fars_2014)
@@ -40,9 +41,9 @@ A summary of the data in terms of number of fatalities by month can be computed 
 The following code computes the summary for 2013 data.
 
 ```{r}
-
+print(getwd())
 # fars2013_14 <- fars_summarize_years(years = c(2013,2014))
-# 
+# # 
 # fars2013_14
 
 ```

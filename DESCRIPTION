@@ -7,13 +7,13 @@ Maintainer: Pablo Garcia <pabgamu@gmail.com>
 Description: Summarize and plot data from fars annual reports.
 Depends: 
     R (>= 3.2.0),
+    maps
 License: GPL-3
 LazyData: true
 Imports:
-    maps  (>= 3.1.1),
-    dplyr (>= 0.5.0), 
-    readr (>= 1.0.0),
-    tidyr (>= 0.6.0),
+    dplyr, 
+    readr,
+    tidyr,
 Encoding: UTF-8
 RoxygenNote: 5.0.1
 Suggests:
